@@ -1,10 +1,16 @@
 
 #include <locale.h>
-#include <iostream>
 #include "Tree.h"
-
+#include "TreePrinter.h"
+#include "TreeFunctions.h"
 
 using namespace std;
+
+enum MenuState
+{
+	INIT = 0,
+	EXIT = 7
+};
 
 void main()
 {
@@ -13,7 +19,7 @@ void main()
 
 	//Переменные для пользовательского выбора.
 	int userMenuChoice = -1;
-	Tree* tree;
+	Tree* tree = new Tree();
 
 	//Переменные для работы программы
 
@@ -22,8 +28,8 @@ void main()
 	while (userMenuChoice != 7)
 	{
 		std::system("cls");
-		cout << "Практическая работа #3 ИКБО-03-21 Мазанов А.Е. Вариант 15\n\n"
-			"Задание - Хэш-таблицы.\n"
+		cout << "Практическая работа #4 ИКБО-03-21 Мазанов А.Е. Вариант 15\n\n"
+			"Задание - Деревья.\n"
 			"~~~~~~~~~~~~~~~~~Меню~~~~~~~~~~~~~~~\n";
 
 		cout << "Введите [0], чтобы вывести расшифрованное дерево"
@@ -34,9 +40,19 @@ void main()
 		switch (userMenuChoice)
 		{
 		case 0:
-			tree = new Tree("1*2-3");
-			tree->printTree();
+		{
+			tree = new Tree("1+2+3+4");
+			TreePrinter printer(tree);
+			printer.printExpression();
+			printer.printTree();
+			int leftSum = calculateLeftValue(tree->root);
+			int rightSum = calculateRightValue(tree->root);
+			cout << "Результат в левом поддереве: " << leftSum << '\n';
+			cout << "Результат в правом поддереве: " << rightSum << '\n';
+			cout << "Корень дерева: " << tree->root->value << '\n';
+			cout << "Результат дерева: " << calculateTreeExpression(tree->root) << '\n';
 			break;
+		}
 
 		case 7:
 			cout << "\nДо свидания!\n";
