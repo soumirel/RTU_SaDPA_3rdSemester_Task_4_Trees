@@ -41,7 +41,7 @@ void main()
 		{
 		case 0:
 		{
-			tree = new Tree("1+2+3+4");
+			tree = new Tree("1+2-3+4*5-7");
 			TreePrinter printer(tree);
 			printer.printExpression();
 			printer.printTree();
